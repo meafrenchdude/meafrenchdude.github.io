@@ -4,6 +4,171 @@
   font-weight: 400;
   font-style: normal;
 }
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.sidebar {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 78px;
+	background: #101010;
+	padding: 6px 14px;
+	transition: all 0.5s ease;
+	z-index: 1000;
+}
+
+.sidebar.open {
+	width: 250px;
+}
+
+.sidebar .logo-details {
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+
+.sidebar .logo-details .logo_name {
+	color: white;
+	font-size: 20px;
+	font-weight: 600;
+	opacity: 0;
+	transition: all 0.5s ease;
+	pointer-events: none;
+	user-select: none;
+	margin-left: auto;
+	margin-right: 20px;
+}
+
+.sidebar.open .logo-details,
+.sidebar.open .logo-details .logo_name {
+	opacity: 1;
+	pointer-events: auto;
+	user-select: auto;
+}
+
+.sidebar .logo-details #btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    position: static;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+	transition: all 0.5s ease;
+	margin-right: 2px;
+}
+
+.sidebar.open .logo-details #btn{
+	text-align: center;
+}
+
+.sidebar i{
+	color: white;
+	height: 60px;
+	min-width: 50px;
+	font-size: 28px;
+	text-align: center;
+	line-height: 60px;
+}
+
+.sidebar li {
+	position: relative;
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar li a{
+display: flex;
+height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: transparent;	
+}
+
+.sidebar li a .links_name {
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+    transition: all 0.5s ease;
+    color: #00fd83;
+}
+
+
+.sidebar.open li a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+	user-select: none;
+}
+
+.sidebar li .tooltip {
+    position: absolute;
+	top: 50%;
+	left: calc(100% + 15px);
+    background: #101010;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+	transition: all 0.4s ease;
+	transform: translateY(-50%);
+}
+
+.sidebar.open li .tooltip {
+    display: none;
+}
+
+.page-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 900;
+}
+
+.sidebar.open + .page-overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
 body {
 	background: black;
 	color: white;
@@ -11,11 +176,13 @@ body {
 	margin: 0;
 	font-family: 'Arial-Bold', sans-serif;
 }
+
 img {
   display: block;
   margin: auto;
   width: 10%;
 }
+
 h1 {	
 	position: absolute;
 	top: 50%;
