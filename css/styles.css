@@ -190,4 +190,40 @@ h1 {
 	transform: translate(-50%, -50%);
 	text-align: center;
 	margin: 0;
+@media (max-width: 600px) {
+
+	body {
+        padding-left: 60px;
+    }
+	
+	.sidebar {
+		width: 60px;
+		padding: 6px 8px;
+	}
+
+	.sidebar.open {
+		width: 200px;
+	}
+
+	.sidebar i {
+		min-width: 40px;
+		font-size: 22px;
+	}
+
+	.sidebar .logo-details .logo_name {
+		font-size: 16px;
+	}
+
+	h1 {
+		font-size: 20px;
+		top: 30%;
+		left: calc(50% + 30px);
+		width: 80%;
+		text-align: center;
+	}
+
+	.page_logo img {
+		margin-top: 10px;
+		width: 160px;
+	}
 }
