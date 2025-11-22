@@ -81,6 +81,7 @@
 
 .sidebar li {
 	position: relative;
+	list-style: none;
 }
 
 .sidebar li i {
@@ -169,6 +170,30 @@ height: 100%;
 	pointer-events: auto;
 }
 
+.sidebar li.sub-item a {
+  padding-left: 50px;
+}
+
+.sidebar li.sub-item a .sub_links_name {
+	color: white;
+    font-size: 13px;
+	font-weight: 400;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.4s;
+}
+
+.sidebar.open li.sub-item a .sub_links_name {
+	opacity: 1;
+	pointer-events: auto;
+	user-select: none;
+}
+
+.sidebar.open li.sub-item a:hover .sub_links_name {
+	transition: all 0.5s ease;
+	color: #00fd83;
+}
+
 body {
 	background: black;
 	color: white;
@@ -190,6 +215,8 @@ h1 {
 	transform: translate(-50%, -50%);
 	text-align: center;
 	margin: 0;
+}
+
 @media (max-width: 600px) {
 
 	body {
