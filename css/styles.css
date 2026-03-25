@@ -238,6 +238,534 @@ body {
 	padding: 0 200	px;
 }
 
+.followers h1 {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.projects-section {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.last-followers {
+	margin-bottom: 40px;
+}
+
+.last-followers h2 {
+	text-align: center;
+  margin-top: 10px;
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.profile-pics-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 15px;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+#recentFollowersList {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	height: 80px;
+}
+
+.profile-pic-wrapper {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: 2px solid rgba(0, 253, 131, 0.3);
+	opacity: 0;
+	transform: scale(0.8);
+	animation: profilePicAppear 0.4s ease forwards;
+}
+
+.profile-pic-wrapper:nth-child(1) { 
+	animation-delay: 0.05s; 
+	left: -225px;
+}
+.profile-pic-wrapper:nth-child(2) { 
+	animation-delay: 0.1s; 
+	left: -180px;
+}
+.profile-pic-wrapper:nth-child(3) { 
+	animation-delay: 0.15s; 
+	left: -135px;
+}
+.profile-pic-wrapper:nth-child(4) { 
+	animation-delay: 0.2s; 
+	left: -90px;
+}
+.profile-pic-wrapper:nth-child(5) { 
+	animation-delay: 0.25s; 
+	left: -45px;
+}
+.profile-pic-wrapper:nth-child(6) { 
+	animation-delay: 0.3s; 
+	left: 0px;
+}
+.profile-pic-wrapper:nth-child(7) { 
+	animation-delay: 0.35s; 
+	left: 45px;
+}
+.profile-pic-wrapper:nth-child(8) { 
+	animation-delay: 0.4s; 
+	left: 90px;
+}
+.profile-pic-wrapper:nth-child(9) { 
+	animation-delay: 0.45s; 
+	left: 135px;
+}
+.profile-pic-wrapper:nth-child(10) { 
+	animation-delay: 0.5s; 
+	left: 180px;
+}
+.plus-icon-wrapper:nth-child(11) { 
+	animation-delay: 0.55s; 
+	left: 225px;
+}
+
+@keyframes profilePicAppear {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.profile-pic-wrapper:hover {
+	transform: scale(1.1);
+	border-color: #00fd83;
+	box-shadow: 0 8px 24px rgba(0, 253, 131, 0.3);
+	background: rgba(0, 253, 131, 0.2);
+}
+
+.plus-icon-wrapper {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: 2px solid rgba(0, 253, 131, 0.3);
+	opacity: 0;
+	transform: scale(0.8);
+	animation: profilePicAppear 0.4s ease forwards;
+	background: rgba(0, 253, 131, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.plus-icon-wrapper:nth-child(11) { animation-delay: 0.55s; left: 225px; }
+
+.plus-icon-wrapper:hover {
+	transform: scale(1.1);
+	border-color: #00fd83;
+	box-shadow: 0 8px 24px rgba(0, 253, 131, 0.3);
+	background: rgba(0, 253, 131, 0.2);
+}
+
+.plus-icon {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	font-weight: bold;
+	color: #00fd83;
+	background: transparent;
+	text-align: center;
+	line-height: 1;
+}
+
+.profile-pic {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.follower-card {
+	position: absolute;
+	bottom: 70px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.95);
+	border: 1px solid #00fd83;
+	border-radius: 12px;
+	padding: 15px;
+	min-width: 200px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	z-index: 1000;
+}
+
+.profile-pic-wrapper:hover .follower-card {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(-10px);
+}
+
+.follower-card-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+.follower-card-avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #00fd83;
+}
+
+.follower-card-info {
+	flex: 1;
+}
+
+.follower-card-name {
+	font-size: 16px;
+	font-weight: bold;
+	color: #00fd83;
+	margin: 0;
+}
+
+.follower-card-username {
+	font-size: 14px;
+	color: #888;
+	margin: 0;
+}
+
+.follower-card-stats {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #00fd83;
+	font-size: 14px;
+}
+
+.follower-card-stats i {
+	font-size: 16px;
+}
+
+.follower-card-link {
+	display: inline-block;
+	margin-top: 8px;
+	padding: 4px 8px;
+	background: #00fd834a;
+	border: 1px solid #00fd83;
+	color: #00fd83;
+	text-decoration: none;
+	border-radius: 6px;
+	font-size: 12px;
+	transition: all 0.3s ease;
+}
+
+.follower-card-link:hover {
+	background: #00fd837a;
+	transform: translateY(-1px);
+}
+
+#msgRecent {
+	text-align: center;
+	margin: 10px 0;
+	font-size: 14px;
+	color: #00fd83;
+}
+
+.show-followers-btn {
+	display: block;
+	margin: 20px auto;
+	padding: 12px 24px;
+	background: #00fd834a;
+	border: 1px solid #00fd83;
+	color: #00fd83;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+}
+
+.show-followers-btn:hover {
+	background: #00fd837a;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 253, 131, 0.3);
+}
+
+#followersList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+	opacity: 0;
+	transform: translateY(20px);
+	transition: all 0.5s ease;
+}
+
+#followersList.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+#followersList.hide {
+	opacity: 0;
+	transform: translateY(-20px);
+}
+
+#followersList li {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(0, 253, 131, 0.3);
+	border-radius: 12px;
+	padding: 20px;
+	text-align: center;
+	transition: all 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	opacity: 0;
+	transform: translateX(30px);
+	animation: followerCardAppear 0.4s ease forwards;
+}
+
+#followersList li:nth-child(1) { animation-delay: 0.02s; }
+#followersList li:nth-child(2) { animation-delay: 0.04s; }
+#followersList li:nth-child(3) { animation-delay: 0.06s; }
+#followersList li:nth-child(4) { animation-delay: 0.08s; }
+#followersList li:nth-child(5) { animation-delay: 0.1s; }
+#followersList li:nth-child(6) { animation-delay: 0.12s; }
+#followersList li:nth-child(7) { animation-delay: 0.14s; }
+#followersList li:nth-child(8) { animation-delay: 0.16s; }
+#followersList li:nth-child(9) { animation-delay: 0.18s; }
+#followersList li:nth-child(10) { animation-delay: 0.2s; }
+#followersList li:nth-child(11) { animation-delay: 0.22s; }
+#followersList li:nth-child(12) { animation-delay: 0.24s; }
+
+@keyframes followerCardAppear {
+	0% {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+#followersList li.slide-out-left {
+	animation: slideOutLeft 0.3s ease forwards;
+}
+
+@keyframes slideOutLeft {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+}
+
+#followersList li.slide-out-right {
+	animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideOutRight {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+}
+
+#followersList li.slide-in-left {
+	opacity: 0;
+	transform: translateX(-30px);
+	animation: slideInLeft 0.4s ease forwards;
+}
+
+@keyframes slideInLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+#followersList li.slide-in-right {
+	opacity: 0;
+	transform: translateX(30px);
+	animation: slideInRight 0.4s ease forwards;
+}
+
+@keyframes slideInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+#followersList li.hiding {
+	animation: followerCardDisappear 0.3s ease forwards;
+}
+
+@keyframes followerCardDisappear {
+	0% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-20px) scale(0.9);
+	}
+}
+
+#followersList li:hover {
+	background: rgba(0, 253, 131, 0.1);
+	border-color: #00fd83;
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(0, 253, 131, 0.2);
+}
+
+.follower-avatar {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #00fd83;
+}
+
+.follower-name {
+	font-size: 18px;
+	font-weight: bold;
+	color: #00fd83;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	text-decoration: none;
+}
+
+.follower-name:hover {
+	text-decoration: none;
+}
+
+.follower-username {
+	font-size: 14px;
+	color: #888;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+#msg {
+	text-align: center;
+	margin: 20px 0;
+	font-size: 16px;
+	color: #00fd83;
+}
+
+.loading {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #00fd83;
+	border-radius: 50%;
+	border-top-color: transparent;
+	animation: spin 1s linear infinite;
+	margin-right: 10px;
+}
+
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}
+
+.pagination-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-top: 30px;
+	padding: 20px;
+}
+
+.pagination-btn {
+	padding: 8px 16px;
+	background: #00fd834a;
+	border: 1px solid #00fd83;
+	color: #00fd83;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+	background: #00fd837a;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 253, 131, 0.3);
+}
+
+.pagination-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(0, 253, 131, 0.2);
+}
+
+.page-info {
+	color: #00fd83;
+	font-size: 14px;
+	font-weight: bold;
+	min-width: 100px;
+	text-align: center;
+}
+
 .projects-section {
 	text-align: center;
 	margin-top: 200px;
@@ -463,6 +991,7 @@ body {
   .projects-section {
     font-size: 12px;
     text-align: center;
+    margin-top: 50px;
     margin-bottom: 50px;
     padding: 0 15px;
   }
@@ -499,6 +1028,102 @@ body {
     right: auto;
     transform: translateX(-50%);
     bottom: 20px;
+  }
+
+  .followers h1 {
+	margin-top: 100px;
+}
+
+  /* Mobile recent followers styles */
+  #recentFollowersList {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(0);
+  }
+
+  .profile-pic-wrapper {
+    width: 35px;
+    height: 35px;
+  }
+
+  .profile-pic-wrapper:nth-child(1) { left: -105px; }
+  .profile-pic-wrapper:nth-child(2) { left: -84px; }
+  .profile-pic-wrapper:nth-child(3) { left: -63px; }
+  .profile-pic-wrapper:nth-child(4) { left: -42px; }
+  .profile-pic-wrapper:nth-child(5) { left: -21px; }
+  .profile-pic-wrapper:nth-child(6) { left: 0px; }
+  .profile-pic-wrapper:nth-child(7) { left: 21px; }
+  .profile-pic-wrapper:nth-child(8) { left: 42px; }
+  .profile-pic-wrapper:nth-child(9) { left: 63px; }
+  .profile-pic-wrapper:nth-child(10) { left: 84px; }
+  .plus-icon-wrapper:nth-child(11) { left: 105px; }
+
+  .plus-icon-wrapper {
+    width: 35px;
+    height: 35px;
+    position: relative;
+  }
+
+  .plus-icon {
+    font-size: 11px;
+  }
+
+  .last-followers h2 {
+    font-size: 19px;
+    margin-bottom: 13px;
+  }
+
+  /* Mobile full followers list styles */
+  #followersList {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  #followersList li {
+    padding: 12px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+
+  #followersList li img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #followersList li h3 {
+    font-size: 14px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  #followersList li p {
+    font-size: 12px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .pagination {
+    gap: 8px;
+    margin-top: 15px;
+    padding: 0 10px;
+  }
+
+  .pagination-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .pagination-info {
+    font-size: 12px;
   }
 
 	.footer p {
