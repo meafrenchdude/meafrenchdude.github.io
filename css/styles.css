@@ -1,3 +1,6 @@
+/* ===================================
+   FONTS & VARIABLES
+   =================================== */
 @font-face {
   font-family: 'Arial-Bold';
   src: url('../fonts/Arial-Bold.woff2') format('woff2');
@@ -12,12 +15,26 @@
   font-style: normal;
 }
 
-*{
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+body {
+	background: black;
+	color: white;
+	min-height: 100vh;
+	margin: 0;
+	font-family: 'Arial', 'Arial', sans-serif;
+}
+
+/* ===================================
+   SIDEBAR NAVIGATION
+   =================================== */
 .sidebar {
 	position: fixed;
 	left: 0;
@@ -74,11 +91,11 @@
 	margin-right: 2px;
 }
 
-.sidebar.open .logo-details #btn{
+.sidebar.open .logo-details #btn {
 	text-align: center;
 }
 
-.sidebar i{
+.sidebar i {
 	color: white;
 	height: 60px;
 	min-width: 50px;
@@ -97,11 +114,12 @@
     line-height: 50px;
     font-size: 18px;
     border-radius: 12px;
+    transition: all 0.4s ease;
 }
 
-.sidebar li a{
-display: flex;
-height: 100%;
+.sidebar li a {
+	display: flex;
+	height: 100%;
     width: 100%;
     border-radius: 12px;
     align-items: center;
@@ -117,15 +135,14 @@ height: 100%;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: 0.4s;
+    transition: opacity 0.4s ease;
 }
 
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
-    transition: all 0.5s ease;
     color: #00fd83;
+    transition: color 0.5s ease;
 }
-
 
 .sidebar.open li a .links_name {
     opacity: 1;
@@ -135,8 +152,8 @@ height: 100%;
 
 .sidebar li .tooltip {
     position: absolute;
-	top: 50%;
-	left: calc(100% + 15px);
+    top: 50%;
+    left: calc(100% + 15px);
     background: #101010;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     padding: 6px 12px;
@@ -146,14 +163,12 @@ height: 100%;
     opacity: 0;
     white-space: nowrap;
     pointer-events: none;
-    transition: 0s;
+    transition: opacity 0.4s ease;
 }
 
 .sidebar li:hover .tooltip {
     opacity: 1;
     pointer-events: auto;
-	transition: all 0.4s ease;
-	transform: translateY(-50%);
 }
 
 .sidebar.open li .tooltip {
@@ -192,7 +207,7 @@ height: 100%;
 	font-weight: 400;
 	opacity: 0;
 	pointer-events: none;
-	transition: 0.4s;
+	transition: opacity 0.4s ease;
 }
 
 .sidebar.open li.sub-item a .sub_links_name {
@@ -206,14 +221,9 @@ height: 100%;
 	color: #00fd83;
 }
 
-body {
-	background: black;
-	color: white;
-	min-height: 100vh;
-	margin: 0;
-	font-family: 'Arial', 'Arial', sans-serif;
-}
-
+/* ===================================
+   MAIN CONTENT
+   =================================== */
 .main-logo {
   position: relative;
   display: block;
@@ -235,17 +245,16 @@ body {
 }
 
 .bio p {
-	padding: 0 200	px;
+	margin-top: 20px;
+	padding: 0 200px;
 }
 
+/* ===================================
+   FOLLOWERS SECTION
+   =================================== */
 .followers h1 {
 	text-align: center;
 	margin-top: 100px;
-}
-
-.projects-section {
-    text-align: center;
-    margin-top: 100px;
 }
 
 .last-followers {
@@ -335,6 +344,7 @@ body {
 	animation-delay: 0.5s; 
 	left: 180px;
 }
+
 .plus-icon-wrapper:nth-child(11) { 
 	animation-delay: 0.55s; 
 	left: 225px;
@@ -375,8 +385,6 @@ body {
 	align-items: center;
 	justify-content: center;
 }
-
-.plus-icon-wrapper:nth-child(11) { animation-delay: 0.55s; left: 225px; }
 
 .plus-icon-wrapper:hover {
 	transform: scale(1.1);
@@ -766,9 +774,12 @@ body {
 	text-align: center;
 }
 
+/* ===================================
+   PROJECTS SECTION
+   =================================== */
 .projects-section {
-	text-align: center;
-	margin-top: 200px;
+    text-align: center;
+    margin-top: 200px;
 }
 
 .projects {
@@ -867,7 +878,9 @@ body {
   50%      { transform: translateY(4px); }
 }
 
-
+/* ===================================
+   FOOTER
+   =================================== */
 .footer {
   text-align: center;
   padding: 20px 0;
@@ -904,6 +917,9 @@ body {
   filter: brightness(0) invert(1);
 }
 
+/* ===================================
+   SNOW EFFECT
+   =================================== */
 .snow-container {
   position: fixed;
   top: 0;
@@ -935,8 +951,10 @@ body {
   }
 }
 
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
 @media (max-width: 600px) {
-
 	body {
         padding-left: 60px;
     }
@@ -986,6 +1004,8 @@ body {
 
   .bio p {
     font-size: 15px;
+	margin-top: 20px;
+    padding: 0;
   }
 
   .projects-section {

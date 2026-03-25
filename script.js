@@ -1,3 +1,6 @@
+/* ===================================
+   DOM ELEMENTS
+   =================================== */
 let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");
 let overlay = document.querySelector(".page-overlay");
@@ -5,15 +8,18 @@ let logo = document.querySelector(".main-logo");
 let projectsSection = document.querySelector(".projects-section");
 let projectsHint = document.querySelector(".projects-hint");
 
-closeBtn.addEventListener("click",() => {
+/* ===================================
+   SIDEBAR FUNCTIONALITY
+   =================================== */
+closeBtn.addEventListener("click", () => {
     sidebar.classList.toggle("open");
     menuBtnChange();
-})
+});
 
 overlay.addEventListener("click", () => {
     sidebar.classList.remove("open");
     menuBtnChange();
-})
+});
 
 function menuBtnChange() {
     if (sidebar.classList.contains("open")) {
@@ -25,28 +31,41 @@ function menuBtnChange() {
 
 menuBtnChange();
 
+/* ===================================
+   SCROLL EFFECTS
+   =================================== */
+let scrollTimeout;
 window.addEventListener("scroll", () => {
-    const scrolled = window.scrollY;
-    const scalingSpeed = 50;
-    const isMobile = window.innerWidth <= 600;
-    const desktopWidth = 350;
-    const mobileWidth = 200;
-    const topWidth = isMobile ? mobileWidth : desktopWidth;
-    
-    if (scrolled > 1) {
-        const progress = Math.min((scrolled - 1) / scalingSpeed, 1);
-        const newMarginTop = 50 - (30 * progress);
-        const widthReduction = isMobile ? 50 : 100;
-        const newWidth = topWidth - (widthReduction * progress);
-        
-        logo.style.marginTop = newMarginTop + "px";
-        logo.style.width = newWidth + "px";
-    } else {
-        logo.style.marginTop = "50px";
-        logo.style.width = topWidth + "px";
+    if (scrollTimeout) {
+        cancelAnimationFrame(scrollTimeout);
     }
+    
+    scrollTimeout = requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        const scalingSpeed = 50;
+        const isMobile = window.innerWidth <= 600;
+        const desktopWidth = 350;
+        const mobileWidth = 200;
+        const topWidth = isMobile ? mobileWidth : desktopWidth;
+        
+        if (scrolled > 1) {
+            const progress = Math.min((scrolled - 1) / scalingSpeed, 1);
+            const newMarginTop = 50 - (30 * progress);
+            const widthReduction = isMobile ? 50 : 100;
+            const newWidth = topWidth - (widthReduction * progress);
+            
+            logo.style.marginTop = newMarginTop + "px";
+            logo.style.width = newWidth + "px";
+        } else {
+            logo.style.marginTop = "50px";
+            logo.style.width = topWidth + "px";
+        }
+    });
 });
 
+/* ===================================
+   SMOOTH SCROLLING
+   =================================== */
 function smoothScrollTo(element) {
   element.scrollIntoView({
     behavior: 'smooth',
@@ -94,7 +113,9 @@ if (projectsSection && projectsHint) {
   updateHintVisibility();
 }
 
-
+/* ===================================
+   SNOW EFFECT
+   =================================== */
 function isSnowSeason(date = new Date()) {
   const month = date.getMonth();
   const day = date.getDate();
@@ -154,7 +175,9 @@ function initSnowEffect() {
 
 window.addEventListener('load', initSnowEffect);
 
-// GitHub followers functionality
+/* ===================================
+   GITHUB FOLLOWERS FUNCTIONALITY
+   =================================== */
 const followersList = document.getElementById('followersList');
 const msg = document.getElementById('msg');
 const pagination = document.getElementById('pagination');
@@ -170,28 +193,28 @@ let currentPage = 1;
 let followersPerPage = 12;
 let isFollowersVisible = false;
 
-// Update followers per page based on screen size
+/* ===================================
+   FOLLOWERS CONFIGURATION
+   =================================== */
 function updateFollowersPerPage() {
     followersPerPage = window.innerWidth <= 600 ? 10 : 12;
 }
 
-// Check screen size on load and resize
 window.addEventListener('resize', updateFollowersPerPage);
 updateFollowersPerPage();
 
-// Load recent followers on page load
 window.addEventListener('DOMContentLoaded', loadRecentFollowers);
 
-async function loadRecentFollowers() {
+/* ===================================
+   GITHUB API FUNCTIONS
+   =================================== */
+async function fetchAllFollowers() {
     const username = 'meafrenchdude';
     let allFollowersData = [];
     let page = 1;
-    const perPage = 100; // Max per page to minimize requests
+    const perPage = 100;
     
     try {
-        msgRecent.innerHTML = '<span class="loading"></span>Loading recent followers...';
-        
-        // Fetch all pages of followers
         while (true) {
             const apiUrl = `https://api.github.com/users/${username}/followers?page=${page}&per_page=${perPage}`;
             const response = await fetch(apiUrl);
@@ -203,7 +226,6 @@ async function loadRecentFollowers() {
             const followersPage = await response.json();
             allFollowersData = allFollowersData.concat(followersPage);
             
-            // If we got fewer followers than per_page, we're done
             if (followersPage.length < perPage) {
                 break;
             }
@@ -213,35 +235,35 @@ async function loadRecentFollowers() {
         
         allFollowers = allFollowersData;
         console.log('Total followers loaded:', allFollowers.length);
+        return allFollowers;
+    } catch (error) {
+        console.error('Error fetching followers:', error);
+        throw error;
+    }
+}
+
+async function loadRecentFollowers() {
+    try {
+        msgRecent.innerHTML = '<span class="loading"></span>Loading recent followers...';
         
-        if (allFollowers.length === 0) {
+        const followers = await fetchAllFollowers();
+        
+        if (followers.length === 0) {
             msgRecent.textContent = 'No followers found.';
             return;
         }
         
-        // Display first 10 followers as recent profile pictures
-        const recentFollowers = allFollowers.slice(0, 10);
+        const recentFollowers = followers.slice(0, 10);
         displayRecentFollowers(recentFollowers);
         
     } catch (error) {
-        console.error('Error fetching recent followers:', error);
         msgRecent.textContent = `Failed to load followers: ${error.message}`;
     }
 }
 
-async function getFollowerCount(username) {
-    try {
-        const response = await fetch(`https://api.github.com/users/${username}`);
-        if (response.ok) {
-            const userData = await response.json();
-            return userData.followers;
-        }
-    } catch (error) {
-        console.error('Error fetching follower count:', error);
-    }
-    return 0;
-}
-
+/* ===================================
+   FOLLOWERS DISPLAY FUNCTIONS
+   =================================== */
 async function displayRecentFollowers(recentFollowers) {
     recentFollowersList.innerHTML = '';
     
@@ -259,7 +281,6 @@ async function displayRecentFollowers(recentFollowers) {
         recentFollowersList.appendChild(wrapper);
     });
     
-    // Add plus icon with follower count if there are more followers
     if (allFollowers.length > 10) {
         const remainingCount = allFollowers.length - 10;
         
@@ -273,7 +294,6 @@ async function displayRecentFollowers(recentFollowers) {
         
         plusWrapper.appendChild(plusIcon);
         
-        // Add click event to toggle followers
         plusWrapper.addEventListener('click', () => {
             toggleFollowers(plusWrapper, plusIcon, remainingCount);
         });
@@ -281,56 +301,30 @@ async function displayRecentFollowers(recentFollowers) {
         recentFollowersList.appendChild(plusWrapper);
     }
     
-    msgRecent.textContent = `Showing the ${recentFollowers.length} most recent followers`;
+    msgRecent.textContent = `Showing ${recentFollowers.length} most recent followers`;
 }
 
 function toggleFollowers(plusWrapper, plusIcon, remainingCount) {
     if (!isFollowersVisible) {
-        // Show followers
         fetchGitHubFollowers();
         isFollowersVisible = true;
-        plusIcon.textContent = '−'; // Change to minus sign
-        plusWrapper.style.background = '#00fd831a '; // Red background when active
+        plusIcon.textContent = '−';
+        plusWrapper.style.background = 'rgba(0, 253, 131, 0.1)';
     } else {
-        // Hide followers
         hideFollowers();
         isFollowersVisible = false;
-        plusIcon.textContent = remainingCount > 99 ? '+99' : `+${remainingCount}`; // Restore original text
-        plusWrapper.style.background = '#00fd831a'; // Restore green background
+        plusIcon.textContent = remainingCount > 99 ? '+99' : `+${remainingCount}`;
+        plusWrapper.style.background = 'rgba(0, 253, 131, 0.1)';
     }
 }
 
 async function fetchGitHubFollowers() {
-    const username = 'meafrenchdude';
-    let allFollowersData = [];
-    let page = 1;
-    const perPage = 100;
-    
     try {
         msg.innerHTML = '<span class="loading"></span>Loading followers...';
         
-        // Fetch all pages of followers
-        while (true) {
-            const apiUrl = `https://api.github.com/users/${username}/followers?page=${page}&per_page=${perPage}`;
-            const response = await fetch(apiUrl);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const followersPage = await response.json();
-            allFollowersData = allFollowersData.concat(followersPage);
-            
-            if (followersPage.length < perPage) {
-                break;
-            }
-            
-            page++;
-        }
+        const followers = await fetchAllFollowers();
         
-        allFollowers = allFollowersData;
-        
-        if (allFollowers.length === 0) {
+        if (followers.length === 0) {
             msg.textContent = 'No followers found.';
             return;
         }
@@ -342,7 +336,6 @@ async function fetchGitHubFollowers() {
         msg.textContent = '';
         
     } catch (error) {
-        console.error('Error fetching followers:', error);
         msg.textContent = 'Failed to load followers. Please try again later.';
     }
 }
@@ -357,7 +350,6 @@ function displayFollowers(direction = 'initial') {
     currentFollowers.forEach((follower, index) => {
         const li = document.createElement('li');
         
-        // Set initial animation class based on direction
         if (direction === 'next') {
             li.classList.add('slide-in-right');
         } else if (direction === 'prev') {
@@ -392,6 +384,9 @@ function displayFollowers(direction = 'initial') {
     }, 50);
 }
 
+/* ===================================
+   PAGINATION FUNCTIONS
+   =================================== */
 function updatePagination() {
     const totalPages = Math.ceil(allFollowers.length / followersPerPage);
     
@@ -410,7 +405,6 @@ function updatePagination() {
 function nextPage() {
     const totalPages = Math.ceil(allFollowers.length / followersPerPage);
     if (currentPage < totalPages) {
-        // Animate current cards sliding out to the left
         const currentCards = followersList.querySelectorAll('li');
         currentCards.forEach(card => card.classList.add('slide-out-left'));
         
@@ -426,7 +420,6 @@ function nextPage() {
 
 function prevPage() {
     if (currentPage > 1) {
-        // Animate current cards sliding out to the right
         const currentCards = followersList.querySelectorAll('li');
         currentCards.forEach(card => card.classList.add('slide-out-right'));
         
@@ -441,11 +434,9 @@ function prevPage() {
 }
 
 function hideFollowers() {
-    // Add hiding class to all follower cards
     const followerCards = followersList.querySelectorAll('li');
     followerCards.forEach(card => card.classList.add('hiding'));
     
-    // Wait for animation to complete before clearing
     setTimeout(() => {
         followersList.innerHTML = '<li></li>';
         followersList.classList.remove('show');
@@ -455,6 +446,9 @@ function hideFollowers() {
     }, 300);
 }
 
+/* ===================================
+   EVENT LISTENERS
+   =================================== */
 if (prevPageBtn) {
     prevPageBtn.addEventListener('click', prevPage);
 }
