@@ -253,7 +253,7 @@ async function loadRecentFollowers() {
             return;
         }
         
-        const recentFollowers = followers.slice(0, 10);
+        const recentFollowers = followers.slice(-10);
         displayRecentFollowers(recentFollowers);
         
     } catch (error) {
@@ -329,6 +329,7 @@ async function fetchGitHubFollowers() {
             return;
         }
         
+        allFollowers = followers.reverse();
         currentPage = 1;
         displayFollowers();
         updatePagination();
